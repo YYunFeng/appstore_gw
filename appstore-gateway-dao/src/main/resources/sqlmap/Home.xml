@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Home">
+
+    <typeAlias alias="HomeInfo" type="com.jd.appstore.gateway.domain.dao.HomeInfo"/>
+    <typeAlias alias="HomeInfoParameter" type="com.jd.appstore.gateway.domain.dao.parameter.HomeInfoParameter"/>
+
+    <select id="findHomeInfo" resultClass="HomeInfo" parameterClass="HomeInfoParameter">
+        SELECT
+        home_areatype AS homeAreaType,
+        link_type AS linkType,
+        linked_appid AS linkedAppId,
+        url AS url,
+        intro AS intro,
+        home_areaid AS homeAreaId,
+        is_app_logo AS isAppLogo
+        FROM
+        tb_recommend
+        WHERE
+        client_type = #clientType#
+        AND moduleid = #moduleId#
+        AND areaid = #areaId#
+        AND pubed_status = 1
+        ORDER BY
+        seq,
+        home_areapos
+    </select>
+
+</sqlMap>

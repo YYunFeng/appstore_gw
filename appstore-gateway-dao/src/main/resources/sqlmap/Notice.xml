@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Notice">
+
+    <typeAlias alias="Notice" type="com.jd.appstore.gateway.domain.dao.Notice"/>
+
+    <select id="findNotice" resultClass="Notice">
+        SELECT
+        id AS id,
+        subject AS subject ,
+        pub_time AS pubTime
+        FROM
+        tb_website_notice
+        WHERE
+        pubed_status=1
+        ORDER BY
+        order_seq
+    </select>
+
+    <select id="findNoticeById" resultClass="Notice" parameterClass="int">
+        SELECT
+        id AS id,
+        subject AS subject ,
+        content AS content,
+        pub_time AS pubTime
+        FROM
+        tb_website_notice
+        WHERE
+        id=#id# AND
+        pubed_status=1
+        ORDER BY
+        order_seq
+    </select>
+
+</sqlMap>

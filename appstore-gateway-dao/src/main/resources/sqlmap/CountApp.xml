@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CountApp">
+    <typeAlias alias="countApp" type="com.jd.appstore.gateway.domain.dao.CountApp"/>
+    <insert id="createCountApp" parameterClass="countApp">
+        INSERT INTO tb_count_app (phone_imei,appid,created)value(#phoneImei#,#appid#,NOW())
+    </insert>
+
+
+    <select id="getCountAppid" resultClass="String" parameterClass="java.util.List">
+        select
+        apps.appid as appid
+        from
+        tb_topic_app as topicApp,
+        tb_apps as apps
+        WHERE
+        apps.appid = topicApp.appid
+        AND
+        apps.package in
+        <iterate close=")" open="(" conjunction=",">
+            <![CDATA[
+                 #packagename[]#
+                ]]>
+        </iterate>
+        AND
+        topicApp.topicId in (106,67)
+    </select>
+</sqlMap>

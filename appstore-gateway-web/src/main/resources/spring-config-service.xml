@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <bean id="salerService" class="com.jd.appstore.gateway.service.impl.SalerServiceImpl"/>
+    <bean id="appService" class="com.jd.appstore.gateway.service.impl.AppServiceImpl"/>
+    <bean id="recommendService" class="com.jd.appstore.gateway.service.impl.RecommendServiceImpl"/>
+    <bean id="topicService" class="com.jd.appstore.gateway.service.impl.TopicServiceImpl"/>
+    <bean id="rankingService" class="com.jd.appstore.gateway.service.impl.RankingServiceImpl"/>
+    <bean id="categoryService" class="com.jd.appstore.gateway.service.impl.CategoryServiceImpl"/>
+    <bean id="homeService" class="com.jd.appstore.gateway.service.impl.HomeServiceImpl"/>
+    <bean id="searchService" class="com.jd.appstore.gateway.service.impl.SearchServiceImpl"/>
+    <bean id="appInfoService" class="com.jd.appstore.gateway.service.impl.AppInfoServiceImpl"/>
+    <bean id="noticeService" class="com.jd.appstore.gateway.service.impl.NoticeServiceImpl"/>
+    <bean id="feedbackService" class="com.jd.appstore.gateway.service.impl.FeedbackServiceImpl"/>
+    <bean id="padChannelService" class="com.jd.appstore.gateway.service.impl.PadChannelServiceImpl"/>
+    <bean id="marketingLogJob" class="com.jd.appstore.gateway.job.MarketingLogJob"/>
+    <bean id="salerLogJob" class="com.jd.appstore.gateway.job.SalerLogJob"/>
+    <bean id="activetionJob" class="com.jd.appstore.gateway.job.ActivetionJob"/>
+    <bean id="marketingLogServerice" class="com.jd.appstore.gateway.service.impl.MarketingLogServiceImpl"/>
+    <bean id="activityService" class="com.jd.appstore.gateway.service.impl.ActivityServiceImpl"/>
+    <bean id="clientPackageService" class="com.jd.appstore.gateway.service.impl.ClientPackageServiceImpl"/>
+    <bean id="padUpdateLogService" class="com.jd.appstore.gateway.service.impl.PadUpdateLogServiceImpl"/>
+    <bean id="salerRankingService" class="com.jd.appstore.gateway.service.impl.SalerRankingServiceImpl"/>
+    <bean id="compulsoryInstallationAppService"
+          class="com.jd.appstore.gateway.service.impl.CompulsoryInstallationAppServiceImpl"/>
+    <bean id="suningPackageService" class="com.jd.appstore.gateway.service.impl.SuningPackageServiceImpl"/>
+    <bean id="rewardStatisticService" class="com.jd.appstore.gateway.service.impl.RewardStatisticServiceImpl"/>
+    <bean id="countAppService" class="com.jd.appstore.gateway.service.impl.CountAppServiceImpl"/>
+    <bean id="exceptionLogService" class="com.jd.appstore.gateway.service.impl.ExceptionLogServiceImpl"/>
+    <bean id="activationService" class="com.jd.appstore.gateway.service.impl.ActivationServiceImpl"/>
+</beans>

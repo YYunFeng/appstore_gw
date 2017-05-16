@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Download">
+
+    <typeAlias alias="DownloadStat" type="com.jd.appstore.gateway.domain.dao.DownloadStat"/>
+
+
+    <select id="findDownloadStat" parameterClass="int" resultClass="DownloadStat">
+        SELECT
+        appid as appId,
+        download_times AS downloadTimes
+        FROM
+        tb_download_totalstat
+        WHERE
+        appid=#appId#
+    </select>
+
+    <select id="findDownloadStatByIds" parameterClass="String" resultClass="java.util.HashMap">
+        SELECT
+        appid as appId,
+        download_times AS downloadTimes
+        FROM
+        tb_download_totalstat
+        WHERE
+        appid in ($appIds$)
+    </select>
+
+
+</sqlMap>

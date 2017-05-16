@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="FillOrder">
+
+    <typeAlias alias="fillOrderLog" type="com.jd.appstore.gateway.domain.dao.FillOrderLog"/>
+    <typeAlias alias="fillOrder" type="com.jd.appstore.gateway.domain.dao.FillOrder"/>
+    <typeAlias alias="apps" type="com.jd.appstore.gateway.domain.dao.Apps"/>
+
+    <insert id="createdFillOrderLog" parameterClass="fillOrderLog">
+        INSERT INTO tb_fill_order_log
+        (id,pad_imei,saler,download_url,fill_order_type,fill_order_percentage,status,mess,created)
+        values
+        (#id#,#padImei#,#saler#,#downloadUrl#,#fillOrderType#,#fillOrderPercentage#,#status#,#mess#,now())
+    </insert>
+    <select id="getFillOrder" resultClass="fillOrder">
+        select
+        type as type,
+        percentage as percentage
+        from
+        tb_fill_order
+    </select>
+
+    <select id="getApps" resultClass="apps" parameterClass="Integer">
+        select
+        package as packageName,
+        zhuowangMark as zhuoWangMark
+        from
+        tb_apps
+        where
+        appid=#appid#
+    </select>
+</sqlMap>

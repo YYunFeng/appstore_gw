@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="recommend" namespace="/inc" extends="gateway-json">
+
+        <!--推广相关接口-->
+        <action name="recommend*" method="{1}" class="com.jd.appstore.gateway.web.action.RecommendAction">
+            <!--推广内容-->
+            <result name="contents" type="json">
+                <param name="root">
+                    recommendContentsRes
+                </param>
+            </result>
+        </action>
+
+
+    </package>
+</struts>

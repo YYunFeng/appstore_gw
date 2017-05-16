@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Client">
+
+    <typeAlias alias="Client" type="com.jd.appstore.gateway.domain.dao.Client"/>
+    <typeAlias alias="ClientParameter" type="com.jd.appstore.gateway.domain.dao.parameter.ClientParameter"/>
+
+    <select id="checkPackageByVersion" parameterClass="ClientParameter" resultClass="Integer">
+        SELECT
+        count(id)
+        FROM
+        tb_client_package
+        WHERE
+        client_type= #clientType#
+        AND
+        version=#version#
+        AND
+        is_valid=1
+    </select>
+
+    <select id="findNewVersionByClientType" parameterClass="ClientParameter" resultClass="Client">
+        SELECT
+        appid as appId,
+        download_times AS downloadTimes
+        FROM
+        tb_download_totalstat
+        WHERE
+        appid in ($appIds$)
+    </select>
+
+
+</sqlMap>

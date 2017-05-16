@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SalerLog">
+    <typeAlias alias="salerLog" type="com.jd.appstore.gateway.domain.util.SalerLog"/>
+    <select id="getSaler" parameterClass="Integer" resultClass="salerLog">
+        SELECT
+        saler_name as salerName,
+        shop_name as shopName,
+        pad_imei as padImei,
+        cid as cid
+        FROM
+        tb_offlineapp_sale_log
+        WHERE
+        saler_no = #salerNo#
+        LIMIT 1
+    </select>
+    <select id="getAppid" resultClass="String">
+        select appid from tb_topic_app where topicId in (67,106)
+    </select>
+
+</sqlMap>

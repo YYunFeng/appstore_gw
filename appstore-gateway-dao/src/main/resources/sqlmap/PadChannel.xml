@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PadChannel">
+    <typeAlias alias="PadChannel" type="com.jd.appstore.gateway.domain.dao.PadChannel"/>
+    <select id="findPadChannel" resultClass="PadChannel">
+        SELECT
+            id AS id,
+            cname AS cname,
+            intro AS intro,
+            gw AS gw,
+            created AS created
+        FROM
+            tb_pad_channel
+    </select>
+
+</sqlMap>

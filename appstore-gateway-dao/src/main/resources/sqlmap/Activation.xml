@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!--激活数据-->
+<sqlMap namespace="Activation">
+
+    <typeAlias alias="activation" type="com.jd.appstore.gateway.domain.dao.Activation"/>
+    <typeAlias alias="activetionLog" type="com.jd.appstore.gateway.domain.dao.ActivetionLog"/>
+    <insert id="createActivation" parameterClass="activation">
+        INSERT INTO tb_cp_phoneimei
+        (phone_imei,appid,cp_import_id,activation_time,created)
+        value
+        (#phoneImei#,#appid#,0,#activationTime#,NOW())
+    </insert>
+
+    <select id="getApp" parameterClass="String" resultClass="Integer">
+        select count(appid) from tb_apps where appid=#appid#
+    </select>
+
+    <select id="getAppName" parameterClass="String" resultClass="String">
+         select app_name from tb_apps where appid=#appid#
+    </select>
+
+    <select id="getActiveLog" resultClass="activetionLog" parameterClass="Integer">
+         select
+             length as length,
+             counts as counts,
+             file_path as filePath,
+             appid as appid
+         from
+            tb_activetion_log
+         where
+            id=#id#
+    </select>
+
+
+    <insert id="createActiveLog"  parameterClass="activetionLog">
+        INSERT INTO tb_activetion_log
+        (appid,created)
+        value
+        (#appid#,NOW())
+        <selectKey resultClass="Integer" keyProperty="id">
+            select last_insert_id() id from tb_activetion_log limit 1
+        </selectKey>
+    </insert>
+
+    <update id="updateActiveLog" parameterClass="activetionLog">
+        update tb_activetion_log
+         set
+            length=#length#,
+            counts=#counts#,
+            file_path=#filePath#
+         where
+            id=#id#
+    </update>
+</sqlMap>

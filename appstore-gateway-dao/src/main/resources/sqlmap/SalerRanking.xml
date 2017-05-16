@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SalerRanking">
+
+    <typeAlias alias="salerRankingObj" type="com.jd.appstore.gateway.domain.obj.SalerRankingObj"/>
+    <!--获取促销员的总的排名-->
+    <select id="getSalerTotalRanking" resultClass="salerRankingObj">
+        SELECT
+        sum(times) AS totalInstallAppsTimes,
+        saler AS saler
+        FROM
+        (
+        SELECT
+        sum(install_times) AS times,
+        saler AS saler
+        FROM
+        tb_offlineapp_install_stat
+
+        GROUP BY
+        saler
+        UNION
+        SELECT
+        sum(install_times) AS times,
+        saler AS saler
+        FROM
+        tb_onlineapp_install_stat
+        GROUP BY
+        saler
+        ) AS c
+        GROUP BY
+        saler
+        ORDER BY
+        totalInstallAppsTimes DESC
+    </select>
+    <!--获取当月促销员的排名-->
+    <select id="getSalerCurrentMonthRanking" resultClass="salerRankingObj">
+        SELECT
+        sum(times) AS currentInstallAppsTimes,
+        saler AS saler
+        FROM
+        (
+        SELECT
+        sum(
+        offInstallstat.install_times
+        ) AS times,
+        offInstallstat.saler AS saler
+        FROM
+        tb_offlineapp_install_stat AS offInstallstat
+        WHERE
+        STR_TO_DATE(
+        CONCAT(
+        offInstallstat. YEAR,
+        '-',
+        offInstallstat. MONTH
+        ),
+        '%Y-%c'
+        ) = STR_TO_DATE(NOW(), '%Y-%c')
+        GROUP BY
+        saler
+        UNION
+        SELECT
+        sum(
+        onlineInstallstat.install_times
+        ) AS times,
+        onlineInstallstat.saler AS saler
+        FROM
+        tb_onlineapp_install_stat AS onlineInstallstat
+        WHERE
+        STR_TO_DATE(
+        CONCAT(
+        onlineInstallstat. YEAR,
+        '-',
+        onlineInstallstat. MONTH
+        ),
+        '%Y-%c'
+        ) = STR_TO_DATE(NOW(), '%Y-%c')
+        GROUP BY
+        saler
+        ) AS c
+        GROUP BY
+        saler
+        ORDER BY
+        currentInstallAppsTimes DESC
+    </select>
+</sqlMap>

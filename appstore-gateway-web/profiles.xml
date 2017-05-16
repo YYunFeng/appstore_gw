@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">
+
+    <profiles>
+
+        <profile>
+            <id>leyu</id>
+            <properties>
+                <!-- 开始 第一部分: 登录相关设置 -->
+                <!-- 系统的cookie加密密钥  -->
+                <appstore-gateway.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</appstore-gateway.cookie.key>
+                <!-- 系统的cookie名称 -->
+                <appstore-gateway.cookie.name>_applogin_</appstore-gateway.cookie.name>
+                <!--erp登录cookie名称 -->
+                <appstore-gateway.hrm.auth.cookie.name>ceshi3.com</appstore-gateway.hrm.auth.cookie.name>
+                <!--erp登录cookie域 -->
+                <appstore-gateway.hrm.auth.cookie.domain>.360buy.com</appstore-gateway.hrm.auth.cookie.domain>
+                <!--erp登录cookie解密密钥 -->
+                <appstore-gateway.hrm.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </appstore-gateway.hrm.login.auth.key>
+                <!--登录超时设置 -->
+                <appstore-gateway.session.timeout>864000</appstore-gateway.session.timeout>
+                <!-- 开始 第一部分: 登录相关设置end -->
+
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置JNDI -->
+                <appstore.gateway.jdbc.datasource.type>dbcp</appstore.gateway.jdbc.datasource.type>
+                <appstore.gateway.jdbc.driver>com.mysql.jdbc.Driver</appstore.gateway.jdbc.driver>
+                <appstore.gateway.jdbc.url>jdbc:mysql://rdserabfrerabfr.mysql.rds.aliyuncs.com/ppad_leyu?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>ppad_leyu</appstore.gateway.jdbc.username>
+                <appstore.gateway.jdbc.password>platomix6815</appstore.gateway.jdbc.password>
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置end -->
+                <!-- 开始 第三部分: 缓存等服务资源，发布时需找运维确定 -->
+                <!-- memcached缓存 -->
+                <appstore.gateway.memcached1.address>127.0.0.1:11211</appstore.gateway.memcached1.address>
+
+                <!-- 开始 第四部分: 服务器配置，发布时需找运维确定 -->
+                <appstore.gateway.log.level>INFO</appstore.gateway.log.level>
+                <appstore.gateway.log.path>/alidata1/logs/leyu/${appstore.gateway.domain.name}
+                </appstore.gateway.log.path>
+
+                <!--ppad营销日志保存路径-->
+                <appstore.gateway.ppad.salers.log.path>/alidata1/logs/leyu/salersLog
+                </appstore.gateway.ppad.salers.log.path>
+                <appstore.gateway.ppad.exception.log.path>/alidata1/logs/leyu/exceptionLog
+                </appstore.gateway.ppad.exception.log.path>
+
+                <appstore.gateway.domain.name>gw.leyu.taotaojing.cn</appstore.gateway.domain.name>
+                <!-- 结束 第四部分: 服务器配置，发布时需找运维确定end -->
+
+                <!-- 开始 第五部分: 依赖的外部接口，发布时需找接口人确定 -->
+                <!--图片服务器和云储存前缀URL-->
+                <appstore.gateway.url.logo>${appstore.gateway.imgserver.domain.name}/cover</appstore.gateway.url.logo>
+                <appstore.gateway.url.img>${appstore.gateway.imgserver.domain.name}</appstore.gateway.url.img>
+                <appstore.gateway.url.apk>${appstore.gateway.imgserver.domain.name}/apk/</appstore.gateway.url.apk>
+                <appstore.gateway.suning.apk>${appstore.gateway.imgserver.domain.name}/suning/
+                </appstore.gateway.suning.apk>
+                <!-- 插图 -->
+                <appstore.gateway.imgserver.domain.name>liuxingyuan-ppad-leyu.oss-cn-beijing.aliyuncs.com
+                </appstore.gateway.imgserver.domain.name>
+
+                <!-- 插图end -->
+
+                <!-- 开始 第七部分: 开发设置 -->
+                <!--struts的运行模式。生产环境要改为false-->
+                <appstore.gateway.struts.devMode>false</appstore.gateway.struts.devMode>
+                <!-- 开始 第七部分: 开发设置end -->
+            </properties>
+        </profile>
+
+        <profile>
+            <id>huasheng</id>
+            <properties>
+                <!-- 开始 第一部分: 登录相关设置 -->
+                <!-- 系统的cookie加密密钥  -->
+                <appstore-gateway.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</appstore-gateway.cookie.key>
+                <!-- 系统的cookie名称 -->
+                <appstore-gateway.cookie.name>_applogin_</appstore-gateway.cookie.name>
+                <!--erp登录cookie名称 -->
+                <appstore-gateway.hrm.auth.cookie.name>ceshi3.com</appstore-gateway.hrm.auth.cookie.name>
+                <!--erp登录cookie域 -->
+                <appstore-gateway.hrm.auth.cookie.domain>.360buy.com</appstore-gateway.hrm.auth.cookie.domain>
+                <!--erp登录cookie解密密钥 -->
+                <appstore-gateway.hrm.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </appstore-gateway.hrm.login.auth.key>
+                <!--登录超时设置 -->
+                <appstore-gateway.session.timeout>864000</appstore-gateway.session.timeout>
+                <!-- 开始 第一部分: 登录相关设置end -->
+
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置JNDI -->
+                <appstore.gateway.jdbc.datasource.type>dbcp</appstore.gateway.jdbc.datasource.type>
+                <appstore.gateway.jdbc.driver>com.mysql.jdbc.Driver</appstore.gateway.jdbc.driver>
+                <appstore.gateway.jdbc.url>jdbc:mysql://rdserabfrerabfr.mysql.rds.aliyuncs.com/ppad_huasheng?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>ppad_huasheng</appstore.gateway.jdbc.username>
+                <appstore.gateway.jdbc.password>platomix6815</appstore.gateway.jdbc.password>
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置end -->
+                <!-- 开始 第三部分: 缓存等服务资源，发布时需找运维确定 -->
+                <!-- memcached缓存 -->
+                <appstore.gateway.memcached1.address>127.0.0.1:11211</appstore.gateway.memcached1.address>
+
+                <!-- 开始 第四部分: 服务器配置，发布时需找运维确定 -->
+                <appstore.gateway.log.level>INFO</appstore.gateway.log.level>
+                <appstore.gateway.log.path>/alidata1/logs/huasheng/${appstore.gateway.domain.name}
+                </appstore.gateway.log.path>
+
+
+                <!--ppad营销日志保存路径-->
+                <appstore.gateway.ppad.salers.new.log.path>/alidata1/logs/huasheng/salersLogs
+                </appstore.gateway.ppad.salers.new.log.path>
+                <appstore.gateway.ppad.salers.log.path>/alidata1/logs/huasheng/salersLog
+                </appstore.gateway.ppad.salers.log.path>
+                <appstore.gateway.ppad.exception.log.path>/alidata1/logs/huasheng/exceptionLog
+                </appstore.gateway.ppad.exception.log.path>
+
+                <appstore.gateway.ppad.activeFile.path>/alidata1/logs/huasheng/activeFile
+                </appstore.gateway.ppad.activeFile.path>
+
+                <appstore.gateway.domain.name>gw.appstore.taotaojing.cn</appstore.gateway.domain.name>
+                <!-- 结束 第四部分: 服务器配置，发布时需找运维确定end -->
+
+                <!-- 开始 第五部分: 依赖的外部接口，发布时需找接口人确定 -->
+                <!--图片服务器和云储存前缀URL-->
+                <appstore.gateway.url.logo>${appstore.gateway.imgserver.domain.name}/cover</appstore.gateway.url.logo>
+                <appstore.gateway.url.img>${appstore.gateway.imgserver.domain.name}</appstore.gateway.url.img>
+                <appstore.gateway.url.apk>${appstore.gateway.imgserver.domain.name}/apk/</appstore.gateway.url.apk>
+                <appstore.gateway.suning.apk>${appstore.gateway.imgserver.domain.name}/suning/
+                </appstore.gateway.suning.apk>
+                <!-- 插图 -->
+                <appstore.gateway.imgserver.domain.name>liuxingyuan-ppad-huasheng.oss-cn-beijing.aliyuncs.com
+                </appstore.gateway.imgserver.domain.name>
+
+                <!-- 插图end -->
+
+                <!-- 开始 第七部分: 开发设置 -->
+                <!--struts的运行模式。生产环境要改为false-->
+                <appstore.gateway.struts.devMode>false</appstore.gateway.struts.devMode>
+                <!-- 开始 第七部分: 开发设置end -->
+            </properties>
+        </profile>
+
+
+
+        <profile>
+            <id>bestbuy</id>
+            <properties>
+                <!-- 开始 第一部分: 登录相关设置 -->
+                <!-- 系统的cookie加密密钥  -->
+                <appstore-gateway.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</appstore-gateway.cookie.key>
+                <!-- 系统的cookie名称 -->
+                <appstore-gateway.cookie.name>_applogin_</appstore-gateway.cookie.name>
+                <!--erp登录cookie名称 -->
+                <appstore-gateway.hrm.auth.cookie.name>ceshi3.com</appstore-gateway.hrm.auth.cookie.name>
+                <!--erp登录cookie域 -->
+                <appstore-gateway.hrm.auth.cookie.domain>.360buy.com</appstore-gateway.hrm.auth.cookie.domain>
+                <!--erp登录cookie解密密钥 -->
+                <appstore-gateway.hrm.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </appstore-gateway.hrm.login.auth.key>
+                <!--登录超时设置 -->
+                <appstore-gateway.session.timeout>864000</appstore-gateway.session.timeout>
+                <!-- 开始 第一部分: 登录相关设置end -->
+
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置JNDI -->
+                <appstore.gateway.jdbc.datasource.type>dbcp</appstore.gateway.jdbc.datasource.type>
+                <appstore.gateway.jdbc.driver>com.mysql.jdbc.Driver</appstore.gateway.jdbc.driver>
+                <appstore.gateway.jdbc.url>jdbc:mysql://rdserabfrerabfr.mysql.rds.aliyuncs.com/ppad_bestbuy?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>ppad_bestbuy</appstore.gateway.jdbc.username>
+                <appstore.gateway.jdbc.password>platomix6815</appstore.gateway.jdbc.password>
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置end -->
+                <!-- 开始 第三部分: 缓存等服务资源，发布时需找运维确定 -->
+                <!-- memcached缓存 -->
+                <appstore.gateway.memcached1.address>127.0.0.1:11211</appstore.gateway.memcached1.address>
+
+                <!-- 开始 第四部分: 服务器配置，发布时需找运维确定 -->
+                <appstore.gateway.log.level>INFO</appstore.gateway.log.level>
+                <appstore.gateway.log.path>/alidata1/logs/bestbuy/${appstore.gateway.domain.name}
+                </appstore.gateway.log.path>
+
+                <!--ppad营销日志保存路径-->
+                <appstore.gateway.ppad.salers.log.path>/alidata1/logs/bestbuy/salersLog
+                </appstore.gateway.ppad.salers.log.path>
+                <appstore.gateway.ppad.exception.log.path>/alidata1/logs/bestbuy/exceptionLog
+                </appstore.gateway.ppad.exception.log.path>
+
+                <appstore.gateway.domain.name>gw.bestbuy.taotaojing.cn</appstore.gateway.domain.name>
+                <!-- 结束 第四部分: 服务器配置，发布时需找运维确定end -->
+
+                <!-- 开始 第五部分: 依赖的外部接口，发布时需找接口人确定 -->
+                <!--图片服务器和云储存前缀URL-->
+                <appstore.gateway.url.logo>${appstore.gateway.imgserver.domain.name}/cover</appstore.gateway.url.logo>
+                <appstore.gateway.url.img>${appstore.gateway.imgserver.domain.name}</appstore.gateway.url.img>
+                <appstore.gateway.url.apk>${appstore.gateway.imgserver.domain.name}/apk/</appstore.gateway.url.apk>
+                <appstore.gateway.suning.apk>${appstore.gateway.imgserver.domain.name}/suning/
+                </appstore.gateway.suning.apk>
+                <!-- 插图 -->
+                <appstore.gateway.imgserver.domain.name>liuxingyuan-ppad-bestbuy.oss-cn-beijing.aliyuncs.com
+                </appstore.gateway.imgserver.domain.name>
+
+                <!-- 插图end -->
+
+                <!-- 开始 第七部分: 开发设置 -->
+                <!--struts的运行模式。生产环境要改为false-->
+                <appstore.gateway.struts.devMode>false</appstore.gateway.struts.devMode>
+                <!-- 开始 第七部分: 开发设置end -->
+            </properties>
+        </profile>
+
+
+        <profile>
+            <id>wifi</id>
+            <properties>
+                <!-- 开始 第一部分: 登录相关设置 -->
+                <!-- 系统的cookie加密密钥  -->
+                <appstore-gateway.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</appstore-gateway.cookie.key>
+                <!-- 系统的cookie名称 -->
+                <appstore-gateway.cookie.name>_applogin_</appstore-gateway.cookie.name>
+                <!--erp登录cookie名称 -->
+                <appstore-gateway.hrm.auth.cookie.name>ceshi3.com</appstore-gateway.hrm.auth.cookie.name>
+                <!--erp登录cookie域 -->
+                <appstore-gateway.hrm.auth.cookie.domain>.360buy.com</appstore-gateway.hrm.auth.cookie.domain>
+                <!--erp登录cookie解密密钥 -->
+                <appstore-gateway.hrm.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </appstore-gateway.hrm.login.auth.key>
+                <!--登录超时设置 -->
+                <appstore-gateway.session.timeout>864000</appstore-gateway.session.timeout>
+                <!-- 开始 第一部分: 登录相关设置end -->
+
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置JNDI -->
+                <appstore.gateway.jdbc.datasource.type>dbcp</appstore.gateway.jdbc.datasource.type>
+                <appstore.gateway.jdbc.driver>com.mysql.jdbc.Driver</appstore.gateway.jdbc.driver>
+                <appstore.gateway.jdbc.url>jdbc:mysql://rdserabfrerabfr.mysql.rds.aliyuncs.com/ppad_wifi?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>ppad_wifi</appstore.gateway.jdbc.username>
+                <appstore.gateway.jdbc.password>platomix6815</appstore.gateway.jdbc.password>
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置end -->
+                <!-- 开始 第三部分: 缓存等服务资源，发布时需找运维确定 -->
+                <!-- memcached缓存 -->
+                <appstore.gateway.memcached1.address>127.0.0.1:11211</appstore.gateway.memcached1.address>
+
+                <!-- 开始 第四部分: 服务器配置，发布时需找运维确定 -->
+                <appstore.gateway.log.level>INFO</appstore.gateway.log.level>
+                <appstore.gateway.log.path>/alidata1/logs/wifi/${appstore.gateway.domain.name}
+                </appstore.gateway.log.path>
+
+                <!--ppad营销日志保存路径-->
+                <appstore.gateway.ppad.salers.log.path>/alidata1/logs/wifi/salersLog
+                </appstore.gateway.ppad.salers.log.path>
+                <appstore.gateway.ppad.exception.log.path>/alidata1/logs/wifi/exceptionLog
+                </appstore.gateway.ppad.exception.log.path>
+
+                <appstore.gateway.domain.name>gw.wifi.taotaojing.cn</appstore.gateway.domain.name>
+                <!-- 结束 第四部分: 服务器配置，发布时需找运维确定end -->
+
+                <!-- 开始 第五部分: 依赖的外部接口，发布时需找接口人确定 -->
+                <!--图片服务器和云储存前缀URL-->
+                <appstore.gateway.url.logo>${appstore.gateway.imgserver.domain.name}/cover</appstore.gateway.url.logo>
+                <appstore.gateway.url.img>${appstore.gateway.imgserver.domain.name}</appstore.gateway.url.img>
+                <appstore.gateway.url.apk>${appstore.gateway.imgserver.domain.name}/apk/</appstore.gateway.url.apk>
+                <appstore.gateway.suning.apk>${appstore.gateway.imgserver.domain.name}/suning/
+                </appstore.gateway.suning.apk>
+                <!-- 插图 -->
+                <appstore.gateway.imgserver.domain.name>liuxingyuan-ppad-wifi.oss-cn-beijing.aliyuncs.com
+                </appstore.gateway.imgserver.domain.name>
+
+                <!-- 插图end -->
+
+                <!-- 开始 第七部分: 开发设置 -->
+                <!--struts的运行模式。生产环境要改为false-->
+                <appstore.gateway.struts.devMode>false</appstore.gateway.struts.devMode>
+                <!-- 开始 第七部分: 开发设置end -->
+            </properties>
+        </profile>
+
+
+        <profile>
+            <id>136_huodong-test</id>
+            <properties>
+                <!-- 开始 第一部分: 登录相关设置 -->
+                <!-- 系统的cookie加密密钥  -->
+                <appstore-gateway.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</appstore-gateway.cookie.key>
+                <!-- 系统的cookie名称 -->
+                <appstore-gateway.cookie.name>_applogin_</appstore-gateway.cookie.name>
+                <!--erp登录cookie名称 -->
+                <appstore-gateway.hrm.auth.cookie.name>ceshi3.com</appstore-gateway.hrm.auth.cookie.name>
+                <!--erp登录cookie域 -->
+                <appstore-gateway.hrm.auth.cookie.domain>.360buy.com</appstore-gateway.hrm.auth.cookie.domain>
+                <!--erp登录cookie解密密钥 -->
+                <appstore-gateway.hrm.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </appstore-gateway.hrm.login.auth.key>
+                <!--登录超时设置 -->
+                <appstore-gateway.session.timeout>864000</appstore-gateway.session.timeout>
+                <!-- 开始 第一部分: 登录相关设置end -->
+
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置JNDI -->
+                <appstore.gateway.jdbc.datasource.type>dbcp</appstore.gateway.jdbc.datasource.type>
+                <appstore.gateway.jdbc.driver>com.mysql.jdbc.Driver</appstore.gateway.jdbc.driver>
+                <appstore.gateway.jdbc.url>jdbc:mysql://172.16.18.8/ppad?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>ppad</appstore.gateway.jdbc.username>
+                <!--<appstore.gateway.jdbc.password>platomix6815</appstore.gateway.jdbc.password>-->
+                <appstore.gateway.jdbc.password>ppadA0b1c900d8</appstore.gateway.jdbc.password>
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置end -->
+                <!-- 开始 第三部分: 缓存等服务资源，发布时需找运维确定 -->
+                <!-- memcached缓存 -->
+                <appstore.gateway.memcached1.address>127.0.0.1:11211</appstore.gateway.memcached1.address>
+                <!-- <appstore.gateway.memcached2.address>10.10.224.208:11218</appstore.gateway.memcached2.address>-->
+                <!-- 结束 第三部分: 缓存等服务资源，发布时需找运维确定end -->
+
+                <!-- 开始 第四部分: 服务器配置，发布时需找运维确定 -->
+                <appstore.gateway.log.level>INFO</appstore.gateway.log.level>
+                <appstore.gateway.log.path>/data/logs/ppad_huodong/tomcat/${appstore.gateway.domain.name}</appstore.gateway.log.path>
+
+                <!--ppad营销日志保存路径-->
+                <appstore.gateway.ppad.salers.log.path>/data/logs/ppad_huodong/salersLog
+                </appstore.gateway.ppad.salers.log.path>
+                <appstore.gateway.ppad.exception.log.path>/data/logs/ppad_huodong/exceptionLog
+                </appstore.gateway.ppad.exception.log.path>
+
+                <appstore.gateway.domain.name>gw.huodong.taotaojing.cn</appstore.gateway.domain.name>
+                <!-- 结束 第四部分: 服务器配置，发布时需找运维确定end -->
+
+                <!--卓望接口配置-->
+                <appstore.gateway.zhuowang.interface.login.url>
+                    http://10.2.15.71:8187/admin/portalService.portal
+                </appstore.gateway.zhuowang.interface.login.url>
+                <appstore.gateway.zhuowang.interface.order.url>
+                    http://10.2.20.17:8080/TRANSCENTER/download/
+                </appstore.gateway.zhuowang.interface.order.url>
+                <appstore.gateway.zhuowang.interface.login.deskey>
+                    88888888
+                </appstore.gateway.zhuowang.interface.login.deskey>
+                <appstore.gateway.zhuowang.interface.order.authcodekey>
+                    cemwxlh
+                </appstore.gateway.zhuowang.interface.order.authcodekey>
+                <!--卓望接口配置end-->
+                <!-- 开始 第五部分: 依赖的外部接口，发布时需找接口人确定 -->
+                <!--图片服务器和云储存前缀URL-->
+                <appstore.gateway.url.logo>${appstore.gateway.imgserver.domain.name}/cover</appstore.gateway.url.logo>
+                <appstore.gateway.url.img>${appstore.gateway.imgserver.domain.name}</appstore.gateway.url.img>
+                <appstore.gateway.url.apk>${appstore.gateway.imgserver.domain.name}/apk/</appstore.gateway.url.apk>
+                <appstore.gateway.suning.apk>${appstore.gateway.imgserver.domain.name}/suning/</appstore.gateway.suning.apk>
+                <!-- 插图 -->
+                <appstore.gateway.imgserver.business.name>test</appstore.gateway.imgserver.business.name>
+                <appstore.gateway.imgserver.domain.name>img.huodong.taotaojing.cn
+                </appstore.gateway.imgserver.domain.name>
+                <appstore.gateway.uploadImgAuthCode.domain.name>d3a313cb0d444049260ab6c0a6535f3c
+                </appstore.gateway.uploadImgAuthCode.domain.name>
+                <!-- 插图end -->
+
+                <!-- 开始 第七部分: 开发设置 -->
+                <!--struts的运行模式。生产环境要改为false-->
+                <appstore.gateway.struts.devMode>false</appstore.gateway.struts.devMode>
+                <!-- 开始 第七部分: 开发设置end -->
+            </properties>
+        </profile>
+
+
+        <profile>
+            <id>development</id>
+            <properties>
+                <!-- 开始 第一部分: 登录相关设置 -->
+                <!-- 系统的cookie加密密钥  -->
+                <appstore-gateway.cookie.key>xLyhSVcQGix62o+t2fjZyx+bC+zQZCl2</appstore-gateway.cookie.key>
+                <!-- 系统的cookie名称 -->
+                <appstore-gateway.cookie.name>_applogin_</appstore-gateway.cookie.name>
+                <!--erp登录cookie名称 -->
+                <appstore-gateway.hrm.auth.cookie.name>ceshi3.com</appstore-gateway.hrm.auth.cookie.name>
+                <!--erp登录cookie域 -->
+                <appstore-gateway.hrm.auth.cookie.domain>.360buy.com</appstore-gateway.hrm.auth.cookie.domain>
+                <!--erp登录cookie解密密钥 -->
+                <appstore-gateway.hrm.login.auth.key>8B6697227CBCA902B1A0925D40FAA00B353F2DF4359D2099
+                </appstore-gateway.hrm.login.auth.key>
+                <!--登录超时设置 -->
+                <appstore-gateway.session.timeout>864000</appstore-gateway.session.timeout>
+                <!-- 开始 第一部分: 登录相关设置end -->
+
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置JNDI -->
+                <appstore.gateway.jdbc.datasource.type>dbcp</appstore.gateway.jdbc.datasource.type>
+                <appstore.gateway.jdbc.driver>com.mysql.jdbc.Driver</appstore.gateway.jdbc.driver>
+               <!-- <appstore.gateway.jdbc.url>jdbc:mysql://218.240.59.197/appstore_ppad?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>root</appstore.gateway.jdbc.username>
+                <appstore.gateway.jdbc.password>platomix_mysql_test</appstore.gateway.jdbc.password>-->
+
+                <appstore.gateway.jdbc.url>jdbc:mysql://127.0.0.1/appstore_ppad?characterEncoding=UTF-8
+                </appstore.gateway.jdbc.url>
+                <appstore.gateway.jdbc.username>root</appstore.gateway.jdbc.username>
+                <appstore.gateway.jdbc.password>yyf890929</appstore.gateway.jdbc.password>
+               <!-- <appstore.gateway.jdbc.password>platomix6815</appstore.gateway.jdbc.password>-->
+                <!-- 结束 第二部分: 数据库配置，发布时需运维配置end -->
+
+                <!-- 开始 第三部分: 缓存等服务资源，发布时需找运维确定 -->
+                <!-- memcached缓存 -->
+                <appstore.gateway.memcached1.address>182.92.79.56:11211</appstore.gateway.memcached1.address>
+
+                <!-- <appstore.gateway.memcached2.address>10.10.224.208:11218</appstore.gateway.memcached2.address>-->
+                <!-- 结束 第三部分: 缓存等服务资源，发布时需找运维确定end -->
+
+                <!-- 开始 第四部分: 服务器配置，发布时需找运维确定 -->
+                <appstore.gateway.domain.name>localhost:8083</appstore.gateway.domain.name>
+
+                <appstore.gateway.log.level>INFO</appstore.gateway.log.level>
+                <appstore.gateway.log.path>D:/home/tomcat/logs/${appstore.gateway.domain.name}
+                </appstore.gateway.log.path>
+
+
+                <!--ppad营销日志保存路径-->
+                <appstore.gateway.ppad.salers.log.path>F:/salersLog
+                </appstore.gateway.ppad.salers.log.path>
+                <appstore.gateway.ppad.salers.new.log.path>F:/salersLogs
+                </appstore.gateway.ppad.salers.new.log.path>
+
+                <appstore.gateway.ppad.exception.log.path>F:/exceptionLog
+                </appstore.gateway.ppad.exception.log.path>
+
+                <appstore.gateway.ppad.activeFile.path>F:/activeFile
+                </appstore.gateway.ppad.activeFile.path>
+
+
+
+
+                <!--LOGO,截图,APK等资源的URL前缀-->
+                <appstore.gateway.url.logo>${appstore.gateway.imgserver.domain.name}/cover</appstore.gateway.url.logo>
+                <appstore.gateway.url.img>${appstore.gateway.imgserver.domain.name}</appstore.gateway.url.img>
+                <appstore.gateway.url.apk>${appstore.gateway.imgserver.domain.name}/apk/</appstore.gateway.url.apk>
+                <appstore.gateway.suning.apk>${appstore.gateway.imgserver.domain.name}/suning/
+                </appstore.gateway.suning.apk>
+                <!--LOGO,截图,APK等资源的URL前缀end-->
+                <!-- 插图 -->
+                <appstore.gateway.imgserver.business.name>test</appstore.gateway.imgserver.business.name>
+
+                <appstore.gateway.imgserver.domain.name>liuxingyuan-ppad-huasheng.oss-cn-beijing.aliyuncs.com
+                </appstore.gateway.imgserver.domain.name>
+
+
+
+                <!-- 开始 第七部分: 开发设置 -->
+                <!--struts的运行模式。生产环境要改为false-->
+                <appstore.gateway.struts.devMode>true</appstore.gateway.struts.devMode>
+                <!-- 开始 第七部分: 开发设置end -->
+
+
+            </properties>
+        </profile>
+
+    </profiles>
+
+</profilesXml>

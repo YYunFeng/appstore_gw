@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="notice" namespace="/inc" extends="gateway-json">
+
+
+        <!--资讯获取相关接口-->
+        <action name="notice*" method="{1}" class="com.jd.appstore.gateway.web.action.NoticeAction">
+            <!--获取资讯列表-->
+            <result name="list" type="json">
+                <param name="root">
+                    noticeListRes
+                </param>
+            </result>
+            <!--获取资讯内容-->
+            <result name="info" type="json">
+                <param name="root">
+                    noticeInfoRes
+                </param>
+            </result>
+        </action>
+
+
+    </package>
+</struts>

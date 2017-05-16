@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
+
+    <bean id="cacheUtils" class="com.jd.common.cached.CacheUtils">
+        <property name="cacheServerAddress">
+            <list>
+                <value>${appstore.gateway.memcached1.address}</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="appManager" class="com.jd.appstore.gateway.manager.impl.AppManagerImpl"/>
+    <bean id="topicManager" class="com.jd.appstore.gateway.manager.impl.TopicManagerImpl"/>
+    <bean id="recommendLocalManager" class="com.jd.appstore.gateway.manager.impl.RecommendManagerImpl"/>
+    <bean id="rankingManager" class="com.jd.appstore.gateway.manager.impl.RankingManagerImpl"/>
+    <bean id="categoryLocalManager" class="com.jd.appstore.gateway.manager.impl.CategoryManagerImpl"/>
+    <bean id="homeManager" class="com.jd.appstore.gateway.manager.impl.HomeManagerImpl"/>
+    <bean id="searchManager" class="com.jd.appstore.gateway.manager.impl.SearchManagerImpl"/>
+    <bean id="noticeManager" class="com.jd.appstore.gateway.manager.impl.NoticeManagerImpl"/>
+    <bean id="feedbackManager" class="com.jd.appstore.gateway.manager.impl.FeedbackManagerImpl"/>
+    <bean id="downloadManager" class="com.jd.appstore.gateway.manager.impl.DownloadManagerImpl"/>
+    <bean id="driverManager" class="com.jd.appstore.gateway.manager.impl.DriverManagerImpl"/>
+    <bean id="logManager" class="com.jd.appstore.gateway.manager.impl.LogManagerImpl"/>
+    <bean id="padChannelManager" class="com.jd.appstore.gateway.manager.impl.PadChannelManagerImpl"/>
+    <bean id="marketingLogManager" class="com.jd.appstore.gateway.manager.impl.MarketingLogManagerImpl"/>
+    <bean id="activityManager" class="com.jd.appstore.gateway.manager.impl.ActivityManagerImpl"/>
+    <bean id="clientPackageManager" class="com.jd.appstore.gateway.manager.impl.ClientPackageManageImpl"/>
+    <bean id="padUpdateLogManager" class="com.jd.appstore.gateway.manager.impl.PadUpdateLogManagerImpl"/>
+    <bean id="salerRankingManager" class="com.jd.appstore.gateway.manager.impl.SalerRankingManagerImpl"/>
+    <bean id="compulsoryInstallationAppManager" class="com.jd.appstore.gateway.manager.impl.CompulsoryInstallationAppManagerImpl"/>
+    <bean id="suningPackageManger" class="com.jd.appstore.gateway.manager.impl.SuningPackageMangerImpl"/>
+    <bean id="rewardStatisticManager" class="com.jd.appstore.gateway.manager.impl.RewardStatisticManagerImpl"/>
+    <bean id="countAppManager" class="com.jd.appstore.gateway.manager.impl.CountAppManagerImpl"/>
+    <bean id="exceptionLogManager" class="com.jd.appstore.gateway.manager.impl.ExceptionLogManagerImpl"/>
+    <bean id="activationManager" class="com.jd.appstore.gateway.manager.impl.ActivationManagerImpl"/>
+    <bean id="salerManager" class="com.jd.appstore.gateway.manager.impl.SalerManagerImpl"/>
+</beans>

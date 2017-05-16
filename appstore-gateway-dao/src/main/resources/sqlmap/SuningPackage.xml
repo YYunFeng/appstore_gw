@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SuningPackage">
+    <typeAlias alias="suningPackageObj" type="com.jd.appstore.gateway.domain.obj.SuningPackageObj"/>
+    <select id="getSuningPackage" resultClass="suningPackageObj" parameterClass="Integer">
+        SELECT
+        shop_id as shopId,
+        shop_name as shopName,
+        file_url as fileUrl
+        from
+        tb_suning_package
+        WHERE
+        shop_id = #shopId#
+    </select>
+</sqlMap>

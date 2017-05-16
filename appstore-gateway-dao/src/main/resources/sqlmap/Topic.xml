@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Topic">
+
+    <typeAlias alias="Topic" type="com.jd.appstore.gateway.domain.dao.Topic"/>
+    <typeAlias alias="TopicApps" type="com.jd.appstore.gateway.domain.dao.TopicApps"/>
+    <typeAlias alias="TopicParameter" type="com.jd.appstore.gateway.domain.dao.parameter.TopicParameter"/>
+    <typeAlias alias="AppResObj" type="com.jd.appstore.gateway.domain.obj.AppResObj"/>
+
+    <select id="findTopicNameById" parameterClass="int" resultClass="String">
+        select
+        topic_name
+        from
+        tb_topic
+        where
+        topicid = #topicId#
+    </select>
+
+    <select id="findTopicCount" parameterClass="TopicParameter"
+            resultClass="java.lang.Integer">
+        SELECT
+        count(topic.topicid)
+        FROM
+        tb_topic as topic,
+        tb_channel_topic as channelTopic
+        WHERE
+        topic.topic_type = #topicType#
+        AND topic.pubed_status = 1
+        AND channelTopic.topicid = topic.topicid
+        AND channelTopic.cid = #padChannelId#
+    </select>
+
+    <select id="findTopicByPage" parameterClass="TopicParameter"
+            resultClass="Topic">
+        SELECT
+        topic.topicid AS topicId,
+        topic.topic_name AS topicName,
+        topic.topic_type AS topicType,
+        topic.logo_url AS logoUrl,
+        topic.intro AS intro,
+        topic.pub_time AS pubTime
+        FROM
+        tb_topic AS topic,
+        tb_channel_topic AS chanelTopic
+        WHERE
+        topic.pubed_status = 1
+        AND topic.topic_type = #topicType#
+        AND chanelTopic.topicid = topic.topicid
+        AND chanelTopic.cid = #padChannelId#
+        ORDER BY
+        order_seq
+        LIMIT #limit# OFFSET #offset#
+    </select>
+
+    <select id="findTopicNew" parameterClass="TopicParameter"
+            resultClass="Topic">
+        SELECT
+        topic.topicid AS topicId,
+        topic.topic_name AS topicName,
+        topic.topic_type AS topicType,
+        topic.logo_url AS logoUrl,
+        topic.intro AS intro,
+        topic.pub_time AS pubTime
+        FROM
+        tb_topic AS topic,
+        tb_channel_topic AS chanelTopic
+        WHERE
+        topic.pubed_status = 1
+        AND topic.topic_type = 1
+        AND chanelTopic.topicid = topic.topicid
+        AND chanelTopic.cid = #padChannelId#
+        ORDER BY
+        order_seq
+    </select>
+
+    <select id="findTopicApps" parameterClass="TopicParameter"
+            resultClass="TopicApps">
+        SELECT
+        apps.appid AS appId,
+        apps.app_name AS appName,
+        apps.package AS packageName,
+        details.price AS price,
+        details.app_introduce AS appIntroduce,
+        topicapp.activation as activation,
+        category.category_name AS categoryName,
+        details.app_version appVersion,
+        details.logo_url logoUrl,
+        details.pkg_size AS pkgSize,
+        details.is_app_logo AS isAppLogo,
+        appresource.res_url AS resUrl,
+        details.accountid as accountId,
+        details.apkcode as apkCode
+        FROM
+        tb_apps AS apps,
+        tb_app_details AS details,
+        tb_category AS category,
+        tb_topic_app AS topicapp,
+        tb_app_resource AS appresource,
+        tb_channel_topic AS channelTopic
+        WHERE
+        apps.default_detail_id = details.id
+        AND topicapp.appid = apps.appid
+        AND apps.categoryid1 = category.categoryid
+        AND appresource.appid = apps.appid
+        AND appresource.res_type = 0
+        AND topicapp.topicid = #topicId#
+        AND topicapp.pubed_status = 1
+        AND channelTopic.topicid = topicapp.topicid
+        AND channelTopic.cid = #padChannelId#
+        GROUP BY
+        apps.appid
+        ORDER BY
+        topicapp.order_seq
+    </select>
+
+    <!--专题下应用的新接口-->
+    <select id="findTopicNewApps" parameterClass="TopicParameter"
+            resultClass="TopicApps">
+        SELECT
+        apps.appid AS appId,
+        apps.app_name AS appName,
+        apps.package AS packageName,
+        details.price AS price,
+        details.app_introduce AS appIntroduce,
+        topicapp.activation as activation,
+        category.category_name AS categoryName,
+        details.app_version appVersion,
+        details.logo_url logoUrl,
+        details.pkg_size AS pkgSize,
+        details.is_app_logo AS isAppLogo,
+        appresource.res_url AS resUrl,
+        details.accountid as accountId,
+        details.apkcode as apkCode
+        FROM
+        tb_apps AS apps,
+        tb_app_details AS details,
+        tb_category AS category,
+        tb_topic_app AS topicapp,
+        tb_app_resource AS appresource,
+        tb_channel_topic AS channelTopic
+        WHERE
+        apps.default_detail_id = details.id
+        AND topicapp.appid = apps.appid
+        AND apps.categoryid1 = category.categoryid
+        AND appresource.appid = apps.appid
+        AND appresource.res_type = 1
+        AND topicapp.topicid = #topicId#
+        AND topicapp.pubed_status = 1
+        AND channelTopic.topicid = topicapp.topicid
+        AND channelTopic.cid = #padChannelId#
+        GROUP BY
+        apps.appid
+        ORDER BY
+        topicapp.order_seq
+    </select>
+
+    <select id="getAppPics" parameterClass="TopicParameter" resultClass="String">
+        select res_url from tb_app_resource where appid = #appId# and res_type = 0 and accountid = accountId
+    </select>
+
+    <select id="findTopicAppCount" parameterClass="int"
+            resultClass="java.util.HashMap">
+        SELECT
+        topicid AS topicId,
+        count(id) AS appCount
+        FROM
+        tb_topic_app
+        WHERE
+        pubed_status = 1
+        GROUP BY
+        topicId
+    </select>
+
+
+    <select id="getAppRes" parameterClass="String" resultClass="AppResObj">
+        SELECT
+        appid AS appId,
+        res_url as resUrl
+        FROM
+        tb_app_resource
+        WHERE
+        appid IN (
+        SELECT DISTINCT
+        appid
+        FROM
+        tb_topic_app
+        WHERE
+        topicid IN ($topicId$)
+        )
+        AND res_type = 0
+    </select>
+
+</sqlMap>

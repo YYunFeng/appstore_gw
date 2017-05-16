@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CompulsoryInstallation">
+    <typeAlias alias="compulsoryInstallationAppObj" type="com.jd.appstore.gateway.domain.obj.CompulsoryInstallationAppObj"/>
+    <select id="getCompulsoryInstallationApps" resultClass="compulsoryInstallationAppObj">
+        SELECT
+        apps.appid AS appid,
+        apps.app_name AS appName,
+        apps.package AS packAge,
+        baseinfo.cp_name AS cpName,
+        resource.res_url AS url
+        FROM
+        tb_apps AS apps,
+        tb_app_details AS details,
+        tb_install_apps AS installapps,
+        tb_cp_baseinfo AS baseinfo,
+        tb_app_resource AS resource
+        WHERE
+        apps.appid = installapps.appid
+        AND apps.appid = details.appid
+        AND details.id = apps.default_detail_id
+        AND details.accountid = baseinfo.id
+        AND resource.res_type = 1
+        AND resource.is_copy = 0
+        AND resource.appid = apps.appid
+    </select>
+</sqlMap>

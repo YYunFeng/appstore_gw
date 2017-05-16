@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="App">
+
+    <typeAlias alias="AppDetails" type="com.jd.appstore.gateway.domain.dao.AppDetails"/>
+    <typeAlias alias="AppResource" type="com.jd.appstore.gateway.domain.dao.AppResource"/>
+    <typeAlias alias="AppSearch" type="com.jd.appstore.gateway.domain.dao.AppSearch"/>
+    <typeAlias alias="AppUpdate" type="com.jd.appstore.gateway.domain.dao.AppUpdate"/>
+    <typeAlias alias="AppCp" type="com.jd.appstore.gateway.domain.dao.AppCp"/>
+    <typeAlias alias="AppDownloadUrl" type="com.jd.appstore.gateway.domain.dao.AppDownloadUrl"/>
+    <typeAlias alias="AppSearchParameter" type="com.jd.appstore.gateway.domain.dao.parameter.AppSearchParameter"/>
+    <typeAlias alias="AppDetailsParameter" type="com.jd.appstore.gateway.domain.dao.parameter.AppDetailsParameter"/>
+    <typeAlias alias="AppDownloadParameter" type="com.jd.appstore.gateway.domain.dao.parameter.AppDownloadParameter"/>
+    <typeAlias alias="AppResourceParameter" type="com.jd.appstore.gateway.domain.dao.parameter.AppResourceParameter"/>
+    <typeAlias alias="AppUpdateParameter" type="com.jd.appstore.gateway.domain.dao.parameter.AppUpdateParameter"/>
+
+
+    <select id="findAppDetailsByIds" resultClass="AppDetails" parameterClass="String">
+        SELECT
+        cp.cp_name AS cpName,
+        apps.appid AS appId,
+        apps.app_name AS appName,
+        details.price AS price,
+        details.logo_url logoUrl,
+        details.pkg_size AS pkgSize,
+        details.is_app_logo AS isAppLogo
+        FROM
+        tb_apps AS apps,
+        tb_app_details AS details,
+        tb_cp_baseinfo AS cp
+        WHERE
+        apps.appid = details.appid
+        AND details.accountid = cp.id
+        and apps.default_detail_id = details.id
+        AND apps.appid in($appIds$);
+    </select>
+
+    <select id="findAppCp" resultClass="AppCp" parameterClass="int">
+        SELECT
+        details.id AS detailsId,
+        cpbase.cp_name AS cpName,
+        cpreginfo.email AS email
+        FROM
+        tb_app_details AS details,
+        tb_cp_baseinfo AS cpbase,
+        tb_cp_reginfo AS cpreginfo
+        WHERE
+        details.appid = #appId#
+        AND details.accountid = cpbase.id
+        AND cpbase.id = cpreginfo.accountid
+        AND details.online=1
+    </select>
+
+    <select id="findAppUpdate" resultClass="AppUpdate" parameterClass="AppUpdateParameter">
+        SELECT
+        app.appid AS appId,
+        details.id AS detailsId,
+        app.app_name AS appName,
+        app.package AS appPackage,
+        details.app_version AS appVersion,
+        details.app_version_code AS appVersionCode,
+        details.price AS price,
+        details.logo_url AS logoUrl,
+        details.pkg_size AS pkgSize,
+        details.pub_time as pubTime,
+        details.is_app_logo AS isAppLogo
+        FROM
+        tb_apps AS app,
+        tb_app_details AS details
+        WHERE
+        app.package = #packageName#
+        AND details.app_version_code > #appVersionCode#
+        AND details.appid = app.appid
+        AND details.online=1
+        ORDER BY
+        details.app_version_code DESC
+        LIMIT 1
+    </select>
+
+    <select id="findAppResource" resultClass="AppResource" parameterClass="AppResourceParameter">
+        SELECT
+        resource.res_type AS resType,
+        resource.cap_seq AS capSeq,
+        resource.res_url AS resUrl,
+        resource.zhuowangMark as zhuoWangMark
+        FROM
+        tb_apps AS app,
+        tb_app_details AS details,
+        tb_app_resource AS resource
+        WHERE
+        app.appid = #appId#
+        <isNull prepend="AND" property="detailsId">
+            app.default_detail_id = details.id
+        </isNull>
+        <isNotNull prepend="AND" property="detailsId">
+            details.id = #detailsId#
+        </isNotNull>
+        AND resource.appid = details.appid
+        AND details.accountid = resource.accountid
+        AND resource.res_type = 0
+        AND resource.is_copy = 0
+        ORDER BY
+        cap_seq
+    </select>
+
+    <select id="findAppDownloadUrl" resultClass="AppDownloadUrl" parameterClass="AppDownloadParameter">
+        SELECT
+        resource.res_url AS url,
+        app.package AS packageName,
+        details.app_version_code AS appVersionCode,
+        details.zhuowangMark AS zhuowangMark
+        FROM
+        tb_apps AS app,
+        tb_app_details AS details,
+        tb_app_resource AS resource
+        WHERE
+        app.appid = #appId#
+        <isNull prepend="AND" property="detailsId">
+            app.default_detail_id = details.id
+        </isNull>
+        <isNotNull prepend="AND" property="detailsId">
+            details.id = #detailsId#
+        </isNotNull>
+        AND resource.appid = details.appid
+        AND details.accountid = resource.accountid
+        AND resource.res_type = 1
+        AND resource.is_copy = 0
+    </select>
+
+
+    <select id="findAppName" resultClass="String" parameterClass="int">
+        SELECT
+        app_name
+        FROM
+        tb_apps
+        WHERE
+        appid = #appId#
+    </select>
+
+    <select id="findAppDetails" resultClass="AppDetails" parameterClass="AppDetailsParameter">
+        SELECT
+        cp.cp_name AS cpName,
+        apps.appid AS appId,
+        apps.app_name AS appName,
+        apps.default_detail_id AS defaultDetailId,
+        apps.categoryid1 AS categoryId1,
+        apps.categoryid2 AS categoryId2,
+        details.price AS price,
+        details.zhuowangMark as zhuoWangMark,
+        details.pub_time AS pubTime,
+        details.app_version appVersion,
+        details.logo_url logoUrl,
+        details.pkg_size AS pkgSize,
+        details.app_introduce AS appIntroduce,
+        details.is_app_logo AS isAppLogo,
+        category.category_name AS categoryName,
+        appos.os_version_name AS osVersionName
+        FROM
+        tb_apps AS apps,
+        tb_app_details AS details,
+        tb_cp_baseinfo AS cp,
+        tb_category AS category,
+        tb_android_app_osversion AS appos
+        WHERE
+        apps.appid = details.appid
+        AND details.accountid = cp.id
+        AND apps.categoryid1 = category.categoryid
+        AND details.os_version_id = appos.os_version_id
+        <isNull prepend="AND" property="detailsId">
+            apps.default_detail_id = details.id
+        </isNull>
+        <isNotNull prepend="AND" property="detailsId">
+            details.id = #detailsId#
+        </isNotNull>
+        AND apps.appid = #appId#
+    </select>
+
+    <select id="searchApp" resultClass="AppSearch" parameterClass="AppSearchParameter">
+        SELECT
+        app.appid AS appId,
+        app.app_name AS appName,
+        appDetails.price AS price,
+        appDetails.zhuowangMark as zhuoWangMark,
+        appDetails.pkg_size AS pkgSize,
+        app.package AS packageName,
+        appDetails.logo_url AS logoUrl,
+        appDetails.app_introduce AS appIntroduce,
+        appDetails.pub_time AS pubTime,
+        appDetails.app_version appVersion,
+        os.os_version_name AS osVersionName,
+        cp.cp_name AS cpName
+        FROM
+        tb_apps AS app,
+        tb_app_details AS appDetails,
+        tb_android_app_osversion AS os,
+        tb_cp_baseinfo AS cp
+        WHERE
+        app.default_detail_id = appDetails.id
+        AND appDetails.os_version_id = os.os_version_id
+        AND appDetails.accountid = cp.id
+        <isNotNull prepend="AND" property="categoryId">
+            (
+            app.categoryid1 = #categoryId#
+            OR app.categoryid2 = #categoryId#
+            )
+        </isNotNull>
+        <isNotNull prepend="AND" property="keyword">
+            app.app_name like '%$keyword$%'
+        </isNotNull>
+        AND app.ONLINE = 1
+        limit #limit#
+        offset #offset#
+    </select>
+
+    <select id="searchAppCounts" resultClass="Integer" parameterClass="AppSearchParameter">
+        SELECT
+          count(*)
+        FROM
+        tb_apps AS app,
+        tb_app_details AS appDetails,
+        tb_android_app_osversion AS os,
+        tb_cp_baseinfo AS cp
+        WHERE
+        app.default_detail_id = appDetails.id
+        AND appDetails.os_version_id = os.os_version_id
+        AND appDetails.accountid = cp.id
+        <isNotNull prepend="AND" property="categoryId">
+            (
+            app.categoryid1 = #categoryId#
+            OR app.categoryid2 = #categoryId#
+            )
+        </isNotNull>
+        <isNotNull prepend="AND" property="keyword">
+            app.app_name like '%$keyword$%'
+        </isNotNull>
+        AND app.ONLINE = 1
+    </select>
+
+
+</sqlMap>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="addLogs" namespace="/inc" extends="struts-default">
+        <!--上传日志-->
+        <action name="addLogs" method="addLogs" class="com.jd.appstore.gateway.web.action.MarketingLogAction">
+            <result name="success">/WEB-INF/log.html</result>
+        </action>
+    </package>
+
+  <!--  <package name="maketingLog" namespace="/inc" extends="gateway-json">
+        <action name="createMaketingLog" method="createMaketingLog"
+                class="com.jd.appstore.gateway.web.action.MarketingLogAction">
+            <result name="status" type="json">
+                <param name="root">
+                    logStatusRes
+                </param>
+            </result>
+        </action>
+    </package>-->
+
+
+    <package name="pcmaketingLog" namespace="/inc" extends="gateway-json">
+        <action name="pcMarketingLog" method="pcMarketingLog"
+                class="com.jd.appstore.gateway.web.action.PcMarketingLogAction">
+            <result name="status" type="json">
+                <param name="root">
+                    logStatusRes
+                </param>
+            </result>
+        </action>
+    </package>
+
+    <package name="salerlog" namespace="/inc" extends="gateway-json">
+        <action name="salerLog" method="salerLog"
+                class="com.jd.appstore.gateway.web.action.SalerLogAction">
+            <result name="status" type="json">
+                <param name="root">
+                    logStatusRes
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>

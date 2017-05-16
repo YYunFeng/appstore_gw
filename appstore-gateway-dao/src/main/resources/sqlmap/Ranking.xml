@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Ranking">
+
+    <typeAlias alias="Ranking" type="com.jd.appstore.gateway.domain.dao.Ranking"/>
+
+    <select id="findRanking" parameterClass="com.jd.appstore.gateway.domain.dao.parameter.RankingParameter"
+            resultClass="Ranking">
+        SELECT
+        ranking.appid AS appId,
+        app.app_name AS appName,
+        app.package as packageName,
+        details.logo_url AS logoUrl,
+        details.app_version as appVersion,
+        details.app_introduce AS appIntroduce,
+        resource.res_url as downPath,
+        details.apkCode as apkCode,
+        details.pkg_size as pkgSize,
+        details.is_app_logo AS isAppLogo,
+        category.category_name AS categoryName,
+        cp.cp_name AS cpName,
+        app.zhuowangMark as zhuoWangMark
+        FROM
+        tb_ranking_app AS ranking,
+        tb_apps AS app,
+        tb_app_details AS details,
+        tb_category AS category,
+        tb_cp_baseinfo AS cp,
+        tb_app_resource as resource
+        WHERE
+        ranking.appid = app.appid
+        AND app.default_detail_id = details.id
+        AND app.categoryid1 = category.categoryid
+        AND details.accountid = cp.id
+        AND ranking.pubed_status = 1
+        AND ranking.ranking_style = #rankingStyle#
+        AND ranking.ranking_type = #rankingType#
+        AND app.appid = resource.appid
+        AND resource.res_type=1
+        ORDER BY
+        ranking.order_seq
+        limit #limit#
+        offset #offset#
+    </select>
+
+    <select id="getAppRes" parameterClass="String" resultClass="AppResObj">
+        SELECT
+        appid AS appId,
+        res_url as resUrl
+        FROM
+        tb_app_resource
+        WHERE
+        appid IN (
+        $topicId$
+        )
+        AND res_type = 0
+    </select>
+
+</sqlMap>

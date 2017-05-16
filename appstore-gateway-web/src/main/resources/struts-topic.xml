@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="topic" namespace="/inc" extends="gateway-json">
+
+        <!--专题新加接口-->
+        <action name="syncApps" method="syncApps" class="com.jd.appstore.gateway.web.action.SyncAppsAction">
+            <!--专题列表-->
+            <result name="list" type="json">
+                <param name="root">
+                    topicListRes
+                </param>
+                <param name="callbackParameter">
+                    callback
+                </param>
+            </result>
+        </action>
+
+        <!--专题相关接口-->
+        <action name="topic*" method="{1}" class="com.jd.appstore.gateway.web.action.TopicAction">
+            <!--专题列表-->
+            <result name="list" type="json">
+                <param name="root">
+                    topicListRes
+                </param>
+            </result>
+            <!--专题下的应用-->
+            <result name="appList" type="json">
+                <param name="root">
+                    topicAppListRes
+                </param>
+
+            </result>
+        </action>
+
+
+    </package>
+</struts>

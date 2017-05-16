@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ClientVersion">
+    <typeAlias alias="clientPackage" type="com.jd.appstore.gateway.domain.dao.ClientPackage"/>
+    <select id="getClientPackage" resultClass="clientPackage" parameterClass="Integer">
+        select
+        version as version,
+        version_code as versionCode,
+        intro as intro,
+        package_url as packageUrl
+        from
+        tb_client_package
+        where
+           is_valid=1
+        and
+          client_type=#clientType#
+    </select>
+</sqlMap>

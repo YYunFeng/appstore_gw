@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <bean id="gatewayUrl" class="com.jd.appstore.gateway.domain.util.GatewayUrl">
+        <property name="logoUrl" value="http://${appstore.gateway.url.logo}/"/>
+        <property name="imgUrl" value="http://${appstore.gateway.url.img}/"/>
+        <property name="apkUrl" value="http://${appstore.gateway.url.apk}"/>
+        <property name="suningApkUrl" value="http://${appstore.gateway.suning.apk}"/>
+    </bean>
+
+
+    <bean id="paths" class="com.jd.appstore.gateway.domain.util.GatewayPath">
+        <property name="logsPath" value="${appstore.gateway.ppad.salers.log.path}"/>
+        <property name="newLogsPath" value="${appstore.gateway.ppad.salers.new.log.path}"/>
+        <property name="exceptionPath" value="${appstore.gateway.ppad.exception.log.path}"/>
+        <property name="activeFile" value="${appstore.gateway.ppad.activeFile.path}"/>
+    </bean>
+
+</beans>

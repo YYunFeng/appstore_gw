@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Activity">
+
+    <typeAlias alias="activityObj" type="com.jd.appstore.gateway.domain.obj.ActivityObj"/>
+    <typeAlias alias="activityParameter" type="com.jd.appstore.gateway.domain.dao.parameter.ActivityParameter"/>
+
+    <select id="getActivityDetails" parameterClass="activityParameter" resultClass="activityObj">
+        SELECT
+        activity_id as activityId,
+        activity_name as activityName,
+        small_pic as smallPic,
+        large_pic as largePic,
+        file_url as fileUrl
+        FROM
+        tb_activity AS activity,
+        tb_pad_channel AS pad_channel,
+        tb_channel_activity AS channelActivity
+        WHERE
+        activity.id = channelActivity.activity_id
+        AND pad_channel.id = channelActivity.cid
+        AND pad_channel.id = #padChannelId#
+        order by
+        activity.seq
+    </select>
+</sqlMap>

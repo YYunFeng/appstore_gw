@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RewardStatistic">
+    <typeAlias alias="rewardStatisticParameter" type="com.jd.appstore.gateway.domain.dao.parameter.RewardStatisticParameter"/>
+    <typeAlias alias="rewardStatisticObj" type="com.jd.appstore.gateway.domain.obj.RewardStatisticObj"/>
+
+    <select id="getVaildMachine" parameterClass="rewardStatisticParameter" resultClass="Integer">
+        SELECT
+        count(saleLog.appid) AS installAppsCounts
+        FROM
+        tb_offlineapp_install_stat AS saleLog
+        WHERE
+        appid IN (
+            select
+            c.appid from
+            (SELECT
+            appid
+            FROM
+            tb_topic_app
+            WHERE
+            topicid IN (67,75) ) as c
+        )
+        AND saler = #saler#
+        <isNotEmpty prepend="and" property="startTime">
+            STR_TO_DATE(
+            CONCAT(
+            saleLog. YEAR,
+            '-',
+            saleLog. MONTH,
+            '-',
+            saleLog. DAY
+            ),
+            '%Y-%c-%e'
+            ) BETWEEN STR_TO_DATE(
+            #startTime#, '%Y-%c-%e')
+            AND STR_TO_DATE(
+            #endTime#, '%Y-%c-%e')
+        </isNotEmpty>
+    </select>
+    <!--华盛有效安装数量-->
+    <select id="getHuaShengVaildMachine" resultClass="Integer" parameterClass="rewardStatisticParameter">
+        SELECT
+        count(saleLog.appid) AS installAppsCounts
+        FROM
+        tb_offlineapp_install_stat AS saleLog
+        WHERE
+        appid IN (
+            select
+            c.appid from
+           (SELECT
+            appid
+            FROM
+            tb_topic_app
+            WHERE
+             topicid IN (67) ) as c
+        )
+
+        AND saler = #saler#
+        <isNotEmpty prepend="and" property="startTime">
+            STR_TO_DATE(
+            CONCAT(
+            saleLog. YEAR,
+            '-',
+            saleLog. MONTH,
+            '-',
+            saleLog. DAY
+            ),
+            '%Y-%c-%e'
+            ) BETWEEN STR_TO_DATE(
+            #startTime#, '%Y-%c-%e')
+            AND STR_TO_DATE(
+            #endTime#, '%Y-%c-%e')
+        </isNotEmpty>
+    </select>
+
+    <!--自有应用有效安装量-->
+    <select id="getMineVaildMachine" resultClass="Integer" parameterClass="rewardStatisticParameter">
+        SELECT
+        count(saleLog.appid) AS installAppsCounts
+        FROM
+        tb_offlineapp_install_stat AS saleLog
+        WHERE
+        appid IN (
+            select
+            c.appid from
+            (SELECT
+            appid
+            FROM
+            tb_topic_app
+            WHERE
+            topicid IN (75) ) as c
+        )
+        AND saler = #saler#
+        <isNotEmpty prepend="and" property="startTime">
+            STR_TO_DATE(
+            CONCAT(
+            saleLog. YEAR,
+            '-',
+            saleLog. MONTH,
+            '-',
+            saleLog. DAY
+            ),
+            '%Y-%c-%e'
+            ) BETWEEN STR_TO_DATE(
+            #startTime#, '%Y-%c-%e')
+            AND STR_TO_DATE(
+            #endTime#, '%Y-%c-%e')
+        </isNotEmpty>
+    </select>
+    <!--取得专题下的应用总数-->
+    <select resultClass="Integer" id="getAppsCounst">
+        SELECT count(*) from tb_topic_app where topicid in (67, 75)
+    </select>
+
+
+    <select id="getIncome" resultClass="rewardStatisticObj" parameterClass="rewardStatisticParameter">
+        SELECT
+            sum(incomeStats.vaild_counts) AS vaildMachine,
+            sum(incomeStats.rec_app_counts) AS niceCounts,
+            sum(incomeStats.need_app_counts) AS saleCounts,
+            sum(incomeStats.rec_app_income_province) as nicePrice,
+            sum(incomeStats.need_app_income_province) as salePrice,
+            sum(incomeStats.arr_counts) as arrCounts
+        FROM
+           tb_income_statistic AS incomeStats
+        WHERE
+           incomeStats.saler=#saler#
+        <isNotEmpty prepend="and" property="startTime">
+            STR_TO_DATE(
+            incomeStats.install_time,
+            '%Y-%c-%e'
+            ) BETWEEN STR_TO_DATE(#startTime#, '%Y-%c-%e')
+            AND STR_TO_DATE(#endTime#, '%Y-%c-%e')
+        </isNotEmpty>
+    </select>
+
+    <!--店长或者督导-->
+    <select id="incomeNewSaler" parameterClass="rewardStatisticParameter" resultClass="rewardStatisticObj">
+        SELECT
+            saler.saler_no AS salerNo,
+            saler.saler_name AS salerName,
+            saler.shop_name AS shopName,
+            saler.saler_type AS salerType,
+            saler.channel_type AS channelType,
+            sum(incomeNew.app_counts) AS appCounts,
+            sum(incomeNew.arrive_counts) AS arriveCounts,
+            sum(incomeNew.phone_counts) AS phoneCounts,
+            sum(incomeNew.act_counts) as actCounts,
+            sum(incomeNew.act_counts_compute) as actCountsCompute
+        FROM
+            tb_income_new AS incomeNew,
+            tb_saler AS saler
+        WHERE
+             incomeNew.saler_no = saler.saler_no
+        AND
+            <![CDATA[incomeNew.install_time >= #startTime#]]>
+            AND
+            <![CDATA[incomeNew.install_time <= #endTime#]]>
+        AND
+             saler.parent_id = #saler#
+        GROUP BY
+            salerNo
+        order by
+            salerType
+    </select>
+
+
+    <select id="incomeNewSalerDetails" parameterClass="rewardStatisticParameter" resultClass="rewardStatisticObj">
+        SELECT
+            saler.saler_no AS salerNo,
+            saler.saler_name AS salerName,
+            saler.shop_name AS shopName,
+            saler.saler_type AS salerType,
+            saler.channel_type AS channelType,
+            sum(incomeNew.app_counts) AS appCounts,
+            sum(incomeNew.arrive_counts) AS arriveCounts,
+            sum(incomeNew.phone_counts) AS phoneCounts,
+            sum(incomeNew.act_counts) as actCounts,
+            sum(incomeNew.act_counts_compute) as actCountsCompute
+        FROM
+            tb_income_new AS incomeNew,
+            tb_saler AS saler
+        WHERE
+                 incomeNew.saler_no = saler.saler_no
+        AND
+             <![CDATA[incomeNew.install_time >= #startTime#]]>
+        AND
+           <![CDATA[incomeNew.install_time <= #endTime#]]>
+        AND
+            saler.saler_no = #saler#
+        GROUP BY
+         salerNo
+    </select>
+
+    <select id="getSalerType" parameterClass="String" resultClass="Integer">
+         select
+            saler_type as salerType
+         from
+             tb_saler
+         where
+            saler_no=#salerNo#
+    </select>
+</sqlMap>

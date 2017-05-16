@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig  PUBLIC "-//iBATIS.com//DTD SQL Map
+Config 2.0/" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+    <settings cacheModelsEnabled="true" enhancementEnabled="true"
+              lazyLoadingEnabled="false" errorTracingEnabled="true" maxRequests="32"
+              maxSessions="10" maxTransactions="5" useStatementNamespaces="true"/>
+
+    <sqlMap resource="sqlmap/App.xml"/>
+    <sqlMap resource="sqlmap/Recommend.xml"/>
+    <sqlMap resource="sqlmap/Topic.xml"/>
+    <sqlMap resource="sqlmap/Ranking.xml"/>
+    <sqlMap resource="sqlmap/Category.xml"/>
+    <sqlMap resource="sqlmap/Home.xml"/>
+    <sqlMap resource="sqlmap/Search.xml"/>
+    <sqlMap resource="sqlmap/Notice.xml"/>
+    <sqlMap resource="sqlmap/Feedback.xml"/>
+    <sqlMap resource="sqlmap/Download.xml"/>
+    <sqlMap resource="sqlmap/Driver.xml"/>
+    <sqlMap resource="sqlmap/Log.xml"/>
+    <sqlMap resource="sqlmap/PadChannel.xml"/>
+    <sqlMap resource="sqlmap/MarketingLog.xml"/>
+    <sqlMap resource="sqlmap/Activity.xml"/>
+    <sqlMap resource="sqlmap/ClientVersion.xml"/>
+    <sqlMap resource="sqlmap/PadUpdateLog.xml"/>
+    <sqlMap resource="sqlmap/SalerRanking.xml"/>
+    <sqlMap resource="sqlmap/CompulsoryInstallation.xml"/>
+    <sqlMap resource="sqlmap/SuningPackage.xml"/>
+    <sqlMap resource="sqlmap/RewardStatistic.xml"/>
+    <sqlMap resource="sqlmap/CountApp.xml"/>
+    <sqlMap resource="sqlmap/ExceptionLog.xml"/>
+    <sqlMap resource="sqlmap/SalerLog.xml"/>
+    <sqlMap resource="sqlmap/Activation.xml"/>
+    <sqlMap resource="sqlmap/Saler.xml"/>
+
+</sqlMapConfig>

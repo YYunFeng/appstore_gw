@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="${appstore.gateway.struts.devMode}"/>
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.objectFactory.spring.autoWire " value="type"/>
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.custom.i18n.resources" value="message/message"/>
+    <constant name="struts.multipart.maxSize" value="100000000"/>
+
+
+    <package name="gateway-json" extends="json-default">
+        <result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult">
+                <param name="noCache">true</param>
+                <param name="excludeNullProperties">true</param>
+                <param name="contentType">application/json</param>
+                <!--<param name="contentType">text/plain</param>-->
+            </result-type>
+        </result-types>
+
+       <!-- <interceptors>
+            <interceptor name="loginContext"
+                         class="com.jd.appstore.gateway.web.intercept.JdAppStoreLoginContextInterceptor"/>
+            <interceptor name="appstroeInterceptor"
+                         class="com.jd.appstore.gateway.web.intercept.AppStoreLoginInterceptor"/>
+            <interceptor-stack name="appstorestack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="loginContext"/>
+                &lt;!&ndash;<interceptor-ref name="appstroeInterceptor"/>&ndash;&gt;
+            </interceptor-stack>
+        </interceptors>-->
+        <!--<default-interceptor-ref name="appstorestack"/>-->
+
+        <global-results>
+            <result name="notLoginRedirect" type="redirect">/inc/userNotLogin.action</result>
+        </global-results>
+
+    </package>
+
+
+    <package name="appstore-default" extends="struts-default">
+        <result-types>
+            <result-type name="velocity" class="com.jd.common.struts.velocity.VelocityLayoutResult" default="true">
+                <param name="urlBeanId">velocityUrl</param>
+            </result-type>
+        </result-types>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+    </package>
+
+    <include file="struts-user.xml"/>
+    <include file="struts-home.xml"/>
+    <include file="struts-category.xml"/>
+    <include file="struts-app.xml"/>
+    <include file="struts-notice.xml"/>
+    <include file="struts-order.xml"/>
+    <include file="struts-ranking.xml"/>
+    <include file="struts-recommend.xml"/>
+    <include file="struts-topic.xml"/>
+    <include file="struts-app.xml"/>
+    <include file="struts-bought.xml"/>
+    <include file="struts-search.xml"/>
+    <include file="struts-feedback.xml"/>
+    <include file="struts-driver.xml"/>
+    <include file="struts-padchannel.xml"/>
+    <include file="struts-marketinglog.xml"/>
+    <include file="struts-activity.xml"/>
+    <include file="struts-client.xml"/>
+    <include file="struts-padupdatelog.xml"/>
+    <include file="struts-salerranking.xml"/>
+    <include file="struts-compulsoryinstallation.xml"/>
+    <include file="struts-suningpackage.xml"/>
+    <include file="struts-rewardstatistic.xml"/>
+ <!--   <include file="struts-countapp.xml"/>-->
+    <include file="struts-exceptionlog.xml"/>
+    <include file="struts-saler.xml"/>
+    <include file="struts-activation.xml"/>
+
+</struts>

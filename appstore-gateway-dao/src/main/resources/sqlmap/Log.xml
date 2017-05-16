@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Log">
+
+    <typeAlias alias="LogDownloadParameter"
+               type="com.jd.appstore.gateway.domain.dao.parameter.LogDownloadParameter"/>
+
+    <insert id="createdDownloadLog" parameterClass="LogDownloadParameter">
+        INSERT INTO tb_app_download_log
+        (id,pin,appid,orderid,download_time,download_succeed,client_type,uuid,ip,terminal_model,created,modified)
+        VALUES
+        (#id#,#pin#,#appId#,#orderId#,now(),#downloadSucceed#,#clientType#,#uuid#,#ip#,#terminalModel#,now(),now())
+    </insert>
+
+
+</sqlMap>

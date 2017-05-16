@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="createActivation" namespace="/inc" extends="gateway-json">
+        <action name="createActivation" method="createActivation"
+                class="com.jd.appstore.gateway.web.action.ActivationAction">
+            <!--激活数据-->
+            <result name="activation" type="json">
+                <param name="root">
+                    activationRes
+                </param>
+            </result>
+        </action>
+    </package>
+
+
+    <package name="activetion" namespace="/activetion" extends="appstore-default">
+        <!--上传日志-->
+        <action name="*" method="{1}" class="com.jd.appstore.gateway.web.action.ActivationAction">
+            <result name="success">/WEB-INF/activetion.vm</result>
+        </action>
+    </package>
+</struts>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+      <package name="countApp" namespace="/inc" extends="gateway-json">
+          <action name="create*" method="{1}" class="com.jd.appstore.gateway.web.action.CountAppAction">
+              <result name="createCountApp" type="json">
+                  <param name="root">
+                      countAppRes
+                  </param>
+              </result>
+          </action>
+      </package>
+
+
+    <package name="reportCount" namespace="/inc" extends="gateway-json">
+        <action name="reportCount" method="reportCount" class="com.jd.appstore.gateway.web.action.ReportCountAction">
+            <result name="status" type="json">
+                <param name="root">
+                    logStatusRes
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>

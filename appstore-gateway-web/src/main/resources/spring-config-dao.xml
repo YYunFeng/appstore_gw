@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <bean id="defaultSequence" class="com.jd.common.util.Sequence"/>
+
+    <bean id="sequenceUtil" class="com.jd.common.util.SequenceUtil">
+        <property name="defaultSequence" ref="defaultSequence"/>
+    </bean>
+
+
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="classpath:sqlmap-config.xml"/>
+    </bean>
+
+    <bean id="appDao" class="com.jd.appstore.gateway.dao.impl.AppDaoImpl"/>
+    <bean id="topicDao" class="com.jd.appstore.gateway.dao.impl.TopicDaoimpl"/>
+    <bean id="recommendDao" class="com.jd.appstore.gateway.dao.impl.RecommendDaoImpl"/>
+    <bean id="rankingDao" class="com.jd.appstore.gateway.dao.impl.RankingDaoImpl"/>
+    <bean id="categoryDao" class="com.jd.appstore.gateway.dao.impl.CategoryDaoImpl"/>
+    <bean id="homeDao" class="com.jd.appstore.gateway.dao.impl.HomeDaoImpl"/>
+    <bean id="searchDao" class="com.jd.appstore.gateway.dao.impl.SearchDaoImpl"/>
+    <bean id="noticeDao" class="com.jd.appstore.gateway.dao.impl.NoticeDaoImpl"/>
+    <bean id="feedbackDao" class="com.jd.appstore.gateway.dao.impl.FeedbackDaoImpl"/>
+    <bean id="downloadDao" class="com.jd.appstore.gateway.dao.impl.DownloadDaoImpl"/>
+    <bean id="driverDao" class="com.jd.appstore.gateway.dao.impl.DriverDaoImpl"/>
+    <bean id="logDao" class="com.jd.appstore.gateway.dao.impl.LogDaoImpl"/>
+    <bean id="padChannelDao" class="com.jd.appstore.gateway.dao.impl.PadChannelDaoImpl"/>
+    <bean id="marketingLogDao" class="com.jd.appstore.gateway.dao.impl.MarketingLogDaoImpl"/>
+    <bean id="activityDao" class="com.jd.appstore.gateway.dao.impl.ActivityDaoImpl"/>
+    <bean id="clientPackageDao" class="com.jd.appstore.gateway.dao.impl.ClientPackageDaoImpl"/>
+    <bean id="padUpdateLogDao" class="com.jd.appstore.gateway.dao.impl.PadUpdateLogDaoImpl"/>
+    <bean id="salerRankingDao" class="com.jd.appstore.gateway.dao.impl.SalerRankingDaoImpl"/>
+    <bean id="compulsoryInstallationAppDao" class="com.jd.appstore.gateway.dao.impl.CompulsoryInstallationAppDaoImpl"/>
+    <bean id="suningPackageDao" class="com.jd.appstore.gateway.dao.impl.SuningPackageDaoImpl"/>
+    <bean id="rewardStatisticDao" class="com.jd.appstore.gateway.dao.impl.RewardStatisticDaoImpl"/>
+    <bean id="countAppDao" class="com.jd.appstore.gateway.dao.impl.CountAppDaoImpl"/>
+    <bean id="exceptionLogDao" class="com.jd.appstore.gateway.dao.impl.ExceptionLogDaoImpl"/>
+    <bean id="activationDao" class="com.jd.appstore.gateway.dao.impl.ActivationDaoImpl"/>
+    <bean id="salerDao" class="com.jd.appstore.gateway.dao.impl.SalerDaoImpl"/>
+
+</beans>

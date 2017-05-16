@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Driver">
+
+    <typeAlias alias="Driver" type="com.jd.appstore.gateway.domain.dao.Driver"/>
+    <typeAlias alias="DriverParameter" type="com.jd.appstore.gateway.domain.dao.parameter.DriverParameter"/>
+
+    <select id="findDriver" parameterClass="DriverParameter" resultClass="Driver">
+        (
+        SELECT
+        driver_url AS driverUrl,
+        mainfile AS mainfile
+        FROM
+        tb_android_driver
+        WHERE
+        vid = #vid#
+        <isNotNull prepend="AND" property="pid">
+            pid=#pid#
+        </isNotNull>
+        ORDER BY
+        pid ASC
+        )
+        UNION ALL
+        (
+        SELECT
+        driver_url AS driverUrl,
+        mainfile AS mainfile
+        FROM
+        tb_android_driver
+        WHERE
+        vid = #vid#
+        AND (pid IS NULL OR pid = '')
+        )
+        LIMIT 1
+    </select>
+
+
+</sqlMap>

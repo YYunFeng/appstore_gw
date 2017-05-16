@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Search">
+
+    <typeAlias alias="SearchHotKeyword" type="com.jd.appstore.gateway.domain.dao.AppDetails"/>
+
+
+    <select id="findSearchHotKeyword" resultClass="String" parameterClass="int">
+        SELECT
+        word
+        FROM
+        tb_hot_words
+        WHERE
+        published = 1
+        ORDER BY
+        order_seq
+    </select>
+
+
+</sqlMap>

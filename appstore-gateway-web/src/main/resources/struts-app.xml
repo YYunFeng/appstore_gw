@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="app" namespace="/inc" extends="gateway-json">
+        <!--应用相关接口-->
+        <action name="app*" method="{1}" class="com.jd.appstore.gateway.web.action.AppAction">
+            <!--应用搜索-->
+            <result name="search" type="json">
+                <param name="root">
+                    appSearchRes
+                </param>
+            </result>
+
+            <!--应用详情-->
+            <result name="details" type="json">
+                <param name="root">
+                    appDetailsRes
+                </param>
+            </result>
+
+            <!--应用下载-->
+            <result name="download" type="json">
+                <param name="root">
+                    appDownloadRes
+                </param>
+            </result>
+
+            <!--应用更新-->
+            <result name="update" type="json">
+                <param name="root">
+                    appUpdateRes
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>

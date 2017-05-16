@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="feedback" namespace="/inc" extends="gateway-json">
+
+        <!--意见反馈相关接口-->
+        <action name="feedback*" method="{1}" class="com.jd.appstore.gateway.web.action.FeedbackAction">
+            <!--添加反馈-->
+            <result name="add" type="json">
+                <param name="root">
+                    feedbackRes
+                </param>
+            </result>
+        </action>
+
+    </package>
+</struts>

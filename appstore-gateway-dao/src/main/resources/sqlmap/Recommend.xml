@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Recommend">
+
+    <typeAlias alias="Recommend" type="com.jd.appstore.gateway.domain.dao.Recommend"/>
+
+    <select id="findRecommend" parameterClass="Recommend" resultClass="Recommend">
+        select
+        client_type as clientType,moduleid as moduleId,areaid as areaId,
+        seq as seq,url as url,link_type as linkType ,linked_appid as linkedAppId,
+        linked_url as linkedUrl,home_areatype as homeAreaType,
+        home_areapos as homeAreaPos,intro as intro,home_areaid as homeAreaId,is_app_logo
+        as isAppLogo
+        from
+        tb_recommend
+        where
+        pubed_status = 1 and client_type=#clientType# and moduleid = #moduleId#
+        and areaid=#areaId#
+        order by seq;
+    </select>
+
+
+</sqlMap>

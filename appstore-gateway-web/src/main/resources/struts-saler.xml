@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="user" namespace="/inc" extends="gateway-json">
+        <!--促销员相关接口-->
+        <action name="saler*" method="{1}" class="com.jd.appstore.gateway.web.action.SalerAction">
+
+            <!--验证促销员是否存在-->
+            <result name="verifySaler" type="json">
+                <param name="root">
+                    salerRes
+                </param>
+            </result>
+
+            <!--各省份的督导和店长列表-->
+            <result name="salerList" type="json">
+                <param name="root">
+                    provinceRes
+                </param>
+            </result>
+
+            <!--促销员注册-->
+            <result name="register" type="json">
+                <param name="root">
+                    salerRes
+                </param>
+            </result>
+
+            <!--促销员登录-->
+            <result name="login" type="json">
+                <param name="root">
+                    salerRes
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>

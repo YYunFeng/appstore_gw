@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="rewardstatistic" namespace="/inc" extends="gateway-json">
+        <action name="rewardstatistic*" method="{1}" class="com.jd.appstore.gateway.web.action.RewardStatisticAction">
+            <result name="rewardStatisticDetails" type="json">
+                <param name="root">
+                    rewardStatisticRes
+                </param>
+            </result>
+        </action>
+    </package>
+
+    <package name="salerquery" namespace="/inc" extends="gateway-json">
+        <action name="salerQuery*" method="{1}" class="com.jd.appstore.gateway.web.action.SalerQueryAction">
+            <result name="salerQueryDetails" type="json">
+                <param name="root">
+                    salerQueryRes
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>

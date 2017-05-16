@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PadUpdateLog">
+
+    <typeAlias alias="padUpdateLog" type="com.jd.appstore.gateway.domain.dao.PadUpdateLog"/>
+    <select id="getPadUpdateLog" parameterClass="String" resultClass="padUpdateLog">
+        select
+        id as id,
+        imei_number as imeiNumber,
+        update_time as updateTime,
+        upload_log_time as uploadLogTime,
+        update_version_time as updateVersionTime
+        from
+        tb_pad_imei
+        where
+        imei_number=#imeiNumber#
+    </select>
+    <update id="updatePadUpdateLog" parameterClass="padUpdateLog">
+        update tb_pad_imei
+        set
+        imei_number=#imeiNumber#
+        <isNotEmpty property="updateTime" prepend=",">
+            update_time=#updateTime#
+        </isNotEmpty>
+        <isNotEmpty property="uploadLogTime" prepend=",">
+            upload_log_time=#uploadLogTime#
+        </isNotEmpty>
+        <isNotEmpty property="updateVersionTime" prepend=",">
+            update_version_time=#updateVersionTime#
+        </isNotEmpty>
+        where
+        imei_number=#imeiNumber#
+    </update>
+</sqlMap>

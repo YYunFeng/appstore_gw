@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!--促销员-->
+<sqlMap namespace="Saler">
+
+    <typeAlias alias="saler" type="com.jd.appstore.gateway.domain.dao.Saler"/>
+    <typeAlias alias="padChannel" type="com.jd.appstore.gateway.domain.dao.PadChannel"/>
+
+    <!--验证促销员是否存在-->
+    <select id="verifySaler" parameterClass="String" resultClass="Integer">
+         select
+            count(saler_no) as counts
+         from
+            tb_saler
+         where
+             saler_no=#salerNo#
+    </select>
+    <!--创建促销员账号-->
+    <insert id="createSaler" parameterClass="saler">
+       insert into tb_saler
+         (saler_no,cid,saler_name,channel_type,saler_type,parent_id,shop_name,created)
+       values
+         (#salerNo#,#cid#,#salerName#,#channelType#,#salerType#,#parentId#,#shopName#,now())
+    </insert>
+
+    <!--当促销员类型为督导或者店长时，parent_id为自身的ID-->
+    <update id="updateSaler" parameterClass="saler">
+         update
+             tb_saler
+         set
+             parent_id=#salerNo#
+         where
+             saler_no=#salerNo#
+    </update>
+
+    <select id="login" parameterClass="String" resultClass="Saler">
+          select
+            saler.saler_no as salerNo,
+            saler.saler_name as salerName,
+            saler.saler_type as salerType,
+            saler.cid as cid,
+            padChannel.cname as area
+          from
+            tb_saler as saler,
+            tb_pad_channel as padChannel
+          where
+            saler.saler_no=#salerNo#
+          and
+            saler.cid = padChannel.id
+    </select>
+
+
+    <select id="channelList" resultClass="padChannel">
+        select
+            id as id,
+            cname as cname
+        from tb_pad_channel
+    </select>
+
+    <select id="salerList" resultClass="Saler">
+          select
+              saler_no as salerNo,
+              saler_name as salerName,
+              cid as cid,
+              channel_type as channelType,
+              saler_type as salerType
+          from
+             tb_saler
+          where
+             saler_type=0
+           or
+             saler_type=1
+    </select>
+
+</sqlMap>

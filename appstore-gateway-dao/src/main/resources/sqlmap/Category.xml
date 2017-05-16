@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Category">
+
+    <typeAlias alias="Category" type="com.jd.appstore.gateway.domain.dao.Category"/>
+
+    <select id="findLevel2Category" resultClass="Category">
+        SELECT
+        categoryid AS categoryId,
+        category_name AS categoryName,
+        level AS level,
+        parent_id AS parentId,
+        logo_url AS logoUrl,
+        intro AS intro
+        FROM
+        tb_category
+        WHERE
+        level = 2
+        AND pubed_status = 1
+        ORDER BY
+        categoryid
+    </select>
+
+    <select id="findCategoryByParentId" parameterClass="java.lang.Integer" resultClass="Category">
+        SELECT
+        categoryid AS categoryId,
+        category_name AS categoryName,
+        level AS level,
+        parent_id AS parentId,
+        logo_url AS logoUrl,
+        intro AS intro
+        FROM
+        tb_category
+        WHERE
+        pubed_status = 1
+        AND parent_id=#parentId#
+        ORDER BY
+        categoryid
+    </select>
+
+    <select id="findCategoryNameById" parameterClass="java.lang.Integer" resultClass="Category">
+        select
+        a.category_name as categoryName3,
+        b.category_name as categoryName2
+        from
+        tb_category as a,
+        tb_category as b
+        where
+        a.categoryid=#categoryId#
+        and a.parent_id=b.categoryid
+    </select>
+
+
+</sqlMap>
+

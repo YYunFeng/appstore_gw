@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+
+    <bean id="cookieCipherTools" class="com.jd.common.web.cookie.CookieCipherTools">
+        <property name="charsetName" value="gbk"/>
+    </bean>
+    <bean id="cookieUtils" class="com.jd.common.web.cookie.CookieUtils"/>
+    <bean class="com.jd.common.web.cookie.JdCookie" abstract="true" id="jdEncryptCookie">
+        <property name="encrypt" value="true"/>
+        <property name="key" value="${appstore-gateway.cookie.key}"/>
+    </bean>
+    <bean abstract="true" parent="jdEncryptCookie" id="jdLoginCookie">
+        <property name="path" value="/"/>
+        <!--
+        <property name="domain" value=".360buy.net"/>
+        -->
+    </bean>
+    <bean id="jdCookie" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <bean parent="jdLoginCookie">
+                    <property name="name" value="${appstore-gateway.cookie.name}"/>
+                </bean>
+                <bean parent="jdLoginCookie">
+                    <property name="name" value="_latn_"/>
+                </bean>
+               <!-- <bean class="com.jd.common.web.cookie.JdCookie">
+                    <property name="name" value="${appstore-gateway.hrm.auth.cookie.name}"/>
+                    <property name="domain" value="${appstore-gateway.hrm.auth.cookie.domain}"/>
+                </bean>-->
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="velocityUrl" class="java.util.HashMap">
+        <constructor-arg>
+            <map>
+                <entry key="assetModule">
+                    <bean class="com.jd.common.web.url.JdUrl">
+                        <property name="url" value="http://${appstore.gateway.domain.name}/"/>
+                    </bean>
+                </entry>
+            </map>
+        </constructor-arg>
+    </bean>
+</beans>

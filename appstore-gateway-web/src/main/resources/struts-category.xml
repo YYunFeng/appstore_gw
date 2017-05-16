@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <package name="category" namespace="/inc" extends="gateway-json">
+        <!--类目相关接口-->
+        <action name="category*" method="{1}" class="com.jd.appstore.gateway.web.action.CategoryAction">
+            <!--类目列表-->
+            <result name="info" type="json">
+                <param name="root">
+                    categoryRes
+                </param>
+            </result>
+        </action>
+    </package>
+</struts>

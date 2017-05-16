@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MarketingLog">
+
+    <typeAlias alias="AppSaleLogParameter"
+               type="com.jd.appstore.gateway.domain.dao.parameter.AppSaleLogParameter"/>
+
+    <typeAlias alias="salerLogParameter"
+               type="com.jd.appstore.gateway.domain.dao.parameter.SalerLogParameter"/>
+
+
+    <typeAlias alias="MarketErrorLog" type="com.jd.appstore.gateway.domain.dao.MarketErrorLog"/>
+    <!--营销日志表-在线应用-->
+    <insert id="createOnlineAppSaleLog" parameterClass="AppSaleLogParameter">
+        INSERT INTO tb_onlineapp_sale_log (
+        id,cid,pad_imei,login_user,saler_name,saler_no,shop_name,phone_imei,phone_os_ver,phone_vender_name,
+        phone_model_name,install_model,appid,cpid,app_version_name,install_time,statisticsflag,created,modified
+        )VALUES(
+        #id#,#cid#,#padImei#,#loginUser#,#salerName#,#salerNo#,#shopName#,#phoneImei#,
+        #phoneOsVer#,#phoneVenderName#,#phoneModelName#,#installModel#,#appId#,#cpid#,#appVersionName#,#installTime#,0,now(),now()
+        )
+    </insert>
+
+    <!--营销日志表-离线应用-->
+    <insert id="createOfflineAppSaleLog" parameterClass="AppSaleLogParameter">
+        INSERT INTO tb_offlineapp_sale_log (
+        id,cid,pad_imei,login_user,saler_name,saler_no,shop_name,phone_imei,phone_os_ver,phone_vender_name,
+        phone_model_name,install_model,appid,cpid,app_version_name,install_time,statisticsflag,created,modified
+        )VALUES(
+        #id#,#cid#,#padImei#,#loginUser#,#salerName#,#salerNo#,#shopName#,#phoneImei#,
+        #phoneOsVer#,#phoneVenderName#,#phoneModelName#,#installModel#,#appId#,#cpid#,#appVersionName#,#installTime#,0,now(),now()
+        )
+    </insert>
+
+    <insert id="createErrorLog" parameterClass="MarketErrorLog">
+        INSERT INTO tb_marketlog_error_log (
+         error_mess,log_mess,created
+        )VALUES(
+         #errorMess#,#logMess#,now()
+        )
+    </insert>
+
+
+    <insert id="createSalerLog" parameterClass="salerLogParameter">
+        INSERT INTO tb_app_install_log (
+          device_no,saler_no,phone_vender_name,phone_imei,phone_model_name,appid,install_time,phone_os_ver,statistic_flag,created
+        )VALUES(
+          #deviceNo#,#salerNo#,#phoneVenderName#,#phoneImei#,#phoneModelName#,#appid#,#installTime#,#phoneOsVer#,0,now()
+        )
+    </insert>
+</sqlMap>
